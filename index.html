@@ -34,12 +34,6 @@ body {
     cursor: pointer;
 }
 
-.loading {
-    display: none;
-    margin-top: 20px;
-    color: #666;
-}
-
 .video-container {
     display: none;
     width: 100%;
@@ -54,6 +48,7 @@ video {
     background: black;
 }
 
+/* Telegram */
 .telegram-bar {
     position: fixed;
     bottom: 0;
@@ -72,6 +67,35 @@ video {
     border-radius: 25px;
     text-decoration: none;
 }
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.overlay-box button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 20px;
+}
 </style>
 </head>
 
@@ -83,7 +107,6 @@ video {
     <h2>Lanjutkan Menonton Video?</h2>
     <p>Klik tombol di bawah untuk memulai.</p>
     <button class="start-btn" onclick="startVideo()">▶ Mulai Menonton</button>
-    <div class="loading" id="loadingText">Memuat...</div>
 </div>
 
 <div class="video-container" id="videoContainer">
@@ -92,6 +115,15 @@ video {
     </video>
 </div>
 
+<!-- Overlay -->
+<div class="overlay" id="overlay">
+    <div class="overlay-box">
+        <p>🔒 Buka bagian paling seru?</p>
+        <button onclick="unlockVideo()">Lanjutkan</button>
+    </div>
+</div>
+
+<!-- Telegram -->
 <div class="telegram-bar" id="telegramBar">
     <a href="#" onclick="joinTelegram()" class="telegram-btn">Join Telegram</a>
 </div>
@@ -100,62 +132,48 @@ video {
 const ADS_LINK = "https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d";
 const TELEGRAM_LINK = "https://t.me/+sqRMacpzi-xlODc1";
 
-let lastAdTime = 0;
+let firstAdShown = false;
+let secondAdShown = false;
 
-// 🔒 Anti spam (8 detik sekali)
-function showAds() {
-    let now = Date.now();
-    if (now - lastAdTime > 8000) {
-        lastAdTime = now;
+// ▶ Start (Trigger 1 - aman)
+function startVideo() {
+    if (!firstAdShown) {
+        firstAdShown = true;
+        window.open(ADS_LINK, "_blank");
+    }
+
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("videoContainer").style.display = "block";
+
+    const video = document.getElementById("video");
+    video.play();
+
+    // Overlay muncul (biar penasaran)
+    setTimeout(() => {
+        document.getElementById("overlay").style.display = "flex";
+    }, 6000);
+
+    // Telegram muncul belakangan
+    setTimeout(() => {
+        document.getElementById("telegramBar").style.display = "block";
+    }, 9000);
+}
+
+// 🔓 Unlock (Trigger 2 - masih aman)
+function unlockVideo() {
+    document.getElementById("overlay").style.display = "none";
+
+    if (!secondAdShown) {
+        secondAdShown = true;
         window.open(ADS_LINK, "_blank");
     }
 }
 
-// Start
-function startVideo() {
-    showAds();
-
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("videoContainer").style.display = "block";
-    document.getElementById("telegramBar").style.display = "block";
-}
-
-// Telegram
+// 📲 Telegram (tanpa ads biar trust)
 function joinTelegram() {
-    showAds();
-    setTimeout(() => {
-        window.open(TELEGRAM_LINK, "_blank");
-    }, 1000);
+    window.open(TELEGRAM_LINK, "_blank");
 }
-
-// ⏳ Pastikan DOM sudah siap
-window.onload = function() {
-    const video = document.getElementById("video");
-
-    // 🎯 MULTI TRIGGER
-
-    // Klik video
-    video.addEventListener("click", showAds);
-
-    // Play
-    video.addEventListener("play", showAds);
-
-    // Pause
-    video.addEventListener("pause", showAds);
-
-    // Saat mulai benar-benar jalan
-    video.addEventListener("playing", showAds);
-
-    // Klik layar mana saja
-    document.body.addEventListener("click", function(e) {
-        if (!e.target.classList.contains("telegram-btn")) {
-            showAds();
-        }
-    });
-};
 </script>
-
-<script src="https://rungbeacon.com/ac/cd/19/accd19456467f32573107aa43783b50a.js"></script>
 
 </body>
 </html>
