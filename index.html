@@ -3,177 +3,304 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Videy Clean White</title>
+<title>VIDEY HOT VIDEOS</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #ffffff;
-    color: black;
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
-.header {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
+body{
+  background:#111;
+  color:white;
 }
 
-.start-screen {
-    text-align: center;
-    padding: 60px 20px;
+.topbar{
+  background:#fff;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
-.start-btn {
-    margin-top: 20px;
-    background: black;
-    color: white;
-    border: none;
-    padding: 14px 25px;
-    border-radius: 30px;
-    font-size: 16px;
-    cursor: pointer;
+.menu-btn{
+  font-size:22px;
+  color:#444;
 }
 
-.video-container {
-    display: none;
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto 80px;
+.search-box{
+  flex:1;
 }
 
-video {
-    width: 100%;
-    aspect-ratio: 9 / 16;
-    border-radius: 15px;
-    background: black;
+.search-box a{
+  text-decoration:none;
 }
 
-/* Telegram */
-.telegram-bar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #fff;
-    border-top: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-    display: none;
+.search-box input{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:5px;
+  background:#f1f1f1;
+  cursor:pointer;
 }
 
-.telegram-btn {
-    background: #0088cc;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 25px;
-    text-decoration: none;
+.icon{
+  font-size:20px;
+  color:#555;
 }
 
-/* Overlay */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
+.container{
+  padding:10px;
 }
 
-.overlay-box {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
+.title{
+  margin-bottom:15px;
+  font-size:14px;
+  color:#ccc;
 }
 
-.overlay-box button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    background: black;
-    color: white;
-    border-radius: 20px;
+.movie-card{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+  background:#1b1b1b;
+  padding:8px;
+  border-radius:8px;
+  align-items:center;
 }
+
+.movie-video{
+  position:relative;
+  width:120px;
+  height:70px;
+  overflow:hidden;
+  border-radius:5px;
+  flex-shrink:0;
+}
+
+.movie-video video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:5px;
+}
+
+.play-btn{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  background:red;
+  color:white;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+.movie-info{
+  flex:1;
+}
+
+.judul-link{
+  text-decoration:none;
+  color:white;
+}
+
+.judul-link:hover{
+  color:red;
+}
+
+.movie-title{
+  font-size:14px;
+  margin-bottom:5px;
+  line-height:1.4;
+}
+
+.movie-date{
+  font-size:12px;
+  color:#999;
+}
+
+.more{
+  font-size:22px;
+  color:#888;
+}
+
+.floating-btn{
+  position:fixed;
+  right:15px;
+  bottom:15px;
+  width:55px;
+  height:55px;
+  background:red;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:24px;
+  text-decoration:none;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="header"><b>videy.co</b></div>
+<!-- HEADER -->
 
-<div class="start-screen" id="startScreen">
-    <h2>Lanjutkan Menonton Video?</h2>
-    <p>Klik tombol di bawah untuk memulai.</p>
-    <button class="start-btn" onclick="startVideo()">▶ Mulai Menonton</button>
+<div class="topbar">
+
+  <div class="menu-btn">☰</div>
+
+  <div class="search-box">
+
+    <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
+       target="_blank">
+
+      <input type="text"
+             placeholder="Search..."
+             readonly>
+
+    </a>
+
+  </div>
+
+  <div class="icon">♡</div>
+  <div class="icon">⋮</div>
+
 </div>
 
-<div class="video-container" id="videoContainer">
-    <video id="video" controls controlsList="nodownload">
-        <source src="video.mp4" type="video/mp4">
-    </video>
-</div>
+<!-- CONTENT -->
 
-<!-- Overlay -->
-<div class="overlay" id="overlay">
-    <div class="overlay-box">
-        <p>🔒 Buka bagian paling seru?</p>
-        <button onclick="unlockVideo()">Lanjutkan</button>
+<div class="container">
+
+  <div class="title">
+     video hot
+  </div>
+
+  <!-- LOOP 20 VIDEO -->
+
+  <!-- VIDEO 1 -->
+  <div class="movie-card">
+    <div class="movie-video">
+
+      <video poster="https://picsum.photos/300/200?1">
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+
+      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
+         target="_blank"
+         class="play-btn">▶</a>
+
     </div>
+
+    <div class="movie-info">
+
+      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
+         target="_blank"
+         class="judul-link">
+
+        <div class="movie-title">viral</div>
+
+      </a>
+
+      <div class="movie-date">Oct 28, 2026 09:00 AM</div>
+
+    </div>
+
+    <div class="more">⋮</div>
+  </div>
+
+  <!-- VIDEO 2 -->
+  <div class="movie-card">
+    <div class="movie-video">
+
+      <video poster="https://picsum.photos/300/200?2">
+        <source src="video2.mp4" type="video/mp4">
+      </video>
+
+      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
+         target="_blank"
+         class="play-btn">▶</a>
+
+    </div>
+
+    <div class="movie-info">
+
+      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
+         target="_blank"
+         class="judul-link">
+
+        <div class="movie-title">Bu Guru Salsa</div>
+
+      </a>
+
+      <div class="movie-date">Oct 28, 2026 09:00 AM</div>
+
+    </div>
+
+    <div class="more">⋮</div>
+  </div>
+
+  <!-- VIDEO 3 -->
+  <div class="movie-card">
+    <div class="movie-video">
+
+      <video poster="https://picsum.photos/300/200?3">
+        <source src="video3.mp4" type="video/mp4">
+      </video>
+
+      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
+         target="_blank"
+         class="play-btn">▶</a>
+
+    </div>
+
+    <div class="movie-info">
+
+      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
+         target="_blank"
+         class="judul-link">
+
+        <div class="movie-title">Artis Viral</div>
+
+      </a>
+
+      <div class="movie-date">Oct 28, 2026 09:00 AM</div>
+
+    </div>
+
+    <div class="more">⋮</div>
+  </div>
+
+  <!-- DUPLIKASI SAMPAI VIDEO 20 -->
+  <!-- Tinggal copy format di atas -->
+
 </div>
 
-<!-- Telegram -->
-<div class="telegram-bar" id="telegramBar">
-    <a href="#" onclick="joinTelegram()" class="telegram-btn">Join Telegram</a>
-</div>
+<!-- FLOAT BUTTON -->
 
-<script>
-const ADS_LINK = "https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d";
-const TELEGRAM_LINK = "https://t.me/+sqRMacpzi-xlODc1";
+<a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
+   target="_blank"
+   class="floating-btn">
 
-let firstAdShown = false;
-let secondAdShown = false;
+  🔍
 
-// ▶ Start (Trigger 1 - aman)
-function startVideo() {
-    if (!firstAdShown) {
-        firstAdShown = true;
-        window.open(ADS_LINK, "_blank");
-    }
-
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("videoContainer").style.display = "block";
-
-    const video = document.getElementById("video");
-    video.play();
-
-    // Overlay muncul (biar penasaran)
-    setTimeout(() => {
-        document.getElementById("overlay").style.display = "flex";
-    }, 6000);
-
-    // Telegram muncul belakangan
-    setTimeout(() => {
-        document.getElementById("telegramBar").style.display = "block";
-    }, 9000);
-}
-
-// 🔓 Unlock (Trigger 2 - masih aman)
-function unlockVideo() {
-    document.getElementById("overlay").style.display = "none";
-
-    if (!secondAdShown) {
-        secondAdShown = true;
-        window.open(ADS_LINK, "_blank");
-    }
-}
-
-// 📲 Telegram (tanpa ads biar trust)
-function joinTelegram() {
-    window.open(TELEGRAM_LINK, "_blank");
-}
-</script>
+</a>
 
 </body>
 </html>
