@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIDEY HOT VIDEOS</title>
+<title>Video Collection</title>
 
 <style>
 
@@ -11,148 +11,259 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial, sans-serif;
+  font-family:'Segoe UI',sans-serif;
 }
 
 body{
-  background:#111;
+  background:#050505;
   color:white;
+  overflow-x:hidden;
 }
 
-.topbar{
-  background:#fff;
-  padding:10px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
+/* =========================
+   HALAMAN HOME
+========================= */
 
-.menu-btn{
-  font-size:22px;
-  color:#444;
-}
-
-.search-box{
-  flex:1;
-}
-
-.search-box a{
-  text-decoration:none;
-}
-
-.search-box input{
-  width:100%;
-  padding:10px;
-  border:none;
-  border-radius:5px;
-  background:#f1f1f1;
-  cursor:pointer;
-}
-
-.icon{
-  font-size:20px;
-  color:#555;
-}
-
-.container{
-  padding:10px;
-}
-
-.title{
-  margin-bottom:15px;
-  font-size:14px;
-  color:#ccc;
-}
-
-.movie-card{
-  display:flex;
-  gap:10px;
-  margin-bottom:15px;
-  background:#1b1b1b;
-  padding:8px;
-  border-radius:8px;
-  align-items:center;
-}
-
-.movie-video{
+.home-page{
   position:relative;
-  width:120px;
-  height:70px;
+  width:100%;
+  height:100vh;
   overflow:hidden;
-  border-radius:5px;
-  flex-shrink:0;
 }
 
-.movie-video video{
+/* BACKGROUND IMAGE */
+
+.bg-image{
+  position:absolute;
+  width:100%;
+  height:100%;
+  inset:0;
+  object-fit:cover;
+}
+
+/* OVERLAY */
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:
+  linear-gradient(
+    to right,
+    rgba(0,0,0,0.88),
+    rgba(0,0,0,0.45)
+  );
+  backdrop-filter:blur(2px);
+}
+
+/* NAVBAR */
+
+.navbar{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  padding:28px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:10;
+}
+
+.logo{
+  font-size:30px;
+  font-weight:700;
+  color:#d4a45f;
+}
+
+.navbar ul{
+  display:flex;
+  gap:40px;
+  list-style:none;
+}
+
+.navbar ul li{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.navbar ul li:hover{
+  color:#d4a45f;
+}
+
+/* HERO CONTENT */
+
+.hero-content{
+  position:absolute;
+  z-index:10;
+  top:50%;
+  left:60px;
+  transform:translateY(-50%);
+  max-width:600px;
+}
+
+.hero-content span{
+  color:#d4a45f;
+  letter-spacing:4px;
+  font-size:13px;
+}
+
+.hero-content h1{
+  font-size:90px;
+  line-height:0.95;
+  margin:18px 0;
+}
+
+.hero-content p{
+  color:#ddd;
+  line-height:1.7;
+  margin-bottom:28px;
+}
+
+/* BUTTON */
+
+.hero-content button{
+  padding:15px 35px;
+  border:none;
+  background:#d4a45f;
+  color:black;
+  font-weight:700;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.hero-content button:hover{
+  transform:scale(1.05);
+}
+
+/* =========================
+   HALAMAN VIDEO
+========================= */
+
+.video-page{
+  display:none;
+  min-height:100vh;
+  padding:30px;
+  background:#050505;
+}
+
+/* VIDEO BESAR */
+
+.main-video{
+  width:100%;
+  height:75vh;
+  border-radius:22px;
+  overflow:hidden;
+  background:#000;
+  margin-bottom:30px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+
+.main-video video{
   width:100%;
   height:100%;
   object-fit:cover;
-  border-radius:5px;
+  border-radius:22px;
 }
 
-.play-btn{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  background:red;
-  color:white;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
+/* KONTROL VIDEO */
+
+video::-webkit-media-controls-panel{
+  background:rgba(0,0,0,0.92);
+  padding:0 10px;
 }
 
-.movie-info{
-  flex:1;
+video::-webkit-media-controls-download-button{
+  display:none;
 }
 
-.judul-link{
-  text-decoration:none;
-  color:white;
+/* LIST VIDEO */
+
+.video-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:22px;
 }
 
-.judul-link:hover{
-  color:red;
+.video-item{
+  background:#111;
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:0.3s;
+  border:1px solid rgba(255,255,255,0.06);
 }
 
-.movie-title{
+.video-item:hover{
+  transform:translateY(-8px);
+}
+
+.video-item video{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  pointer-events:none;
+}
+
+.video-info{
+  padding:14px;
+}
+
+.video-title{
+  color:#f1d2a1;
+  font-size:16px;
+  font-weight:600;
+}
+
+.video-desc{
+  color:#aaa;
+  margin-top:6px;
   font-size:14px;
-  margin-bottom:5px;
-  line-height:1.4;
+  line-height:1.5;
 }
 
-.movie-date{
-  font-size:12px;
-  color:#999;
+/* BACK BUTTON */
+
+.back-btn{
+  margin-bottom:20px;
+  padding:12px 24px;
+  border:none;
+  background:#d4a45f;
+  color:black;
+  font-weight:700;
+  border-radius:10px;
+  cursor:pointer;
 }
 
-.more{
-  font-size:22px;
-  color:#888;
-}
+/* MOBILE */
 
-.floating-btn{
-  position:fixed;
-  right:15px;
-  bottom:15px;
-  width:55px;
-  height:55px;
-  background:red;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-size:24px;
-  text-decoration:none;
+@media(max-width:768px){
+
+  .navbar{
+    padding:20px;
+  }
+
+  .navbar ul{
+    display:none;
+  }
+
+  .hero-content{
+    left:20px;
+    right:20px;
+  }
+
+  .hero-content h1{
+    font-size:55px;
+  }
+
+  .video-page{
+    padding:15px;
+  }
+
+  .main-video{
+    height:55vh;
+  }
+
 }
 
 </style>
@@ -160,147 +271,190 @@ body{
 
 <body>
 
-<!-- HEADER -->
+<!-- =========================
+     HALAMAN HOME
+========================= -->
 
-<div class="topbar">
+<section class="home-page" id="homePage">
 
-  <div class="menu-btn">☰</div>
+  <!-- BACKGROUND IMAGE -->
+  <img src="108513.jpg" class="bg-image">
 
-  <div class="search-box">
+  <!-- OVERLAY -->
+  <div class="overlay"></div>
 
-    <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
-       target="_blank">
+  <!-- NAVBAR -->
+  <nav class="navbar">
 
-      <input type="text"
-             placeholder="Search..."
-             readonly>
+    <div class="logo">
+      movie clips
+    </div>
 
-    </a>
+    <ul>
+      <li>HOME</li>
+      <li>COLLECTION</li>
+      <li>TRENDING</li>
+      <li>CONTACT</li>
+    </ul>
+
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="hero-content">
+
+    <span>VIDEO</span>
+
+    <h1>
+      Viral <br>
+      terbaru.
+    </h1>
+
+    <p>
+      Kumpulan video trending.
+    </p>
+
+    <button onclick="openVideos()">
+      Masuk
+    </button>
 
   </div>
 
-  <div class="icon">♡</div>
-  <div class="icon">⋮</div>
+</section>
 
-</div>
+<!-- =========================
+     HALAMAN VIDEO
+========================= -->
 
-<!-- CONTENT -->
+<section class="video-page" id="videoPage">
 
-<div class="container">
+  <button class="back-btn" onclick="goHome()">
+    ← Kembali
+  </button>
 
-  <div class="title">
-     video hot
+  <div class="main-video">
+
+    <video
+      id="mainPlayer"
+      controls
+      autoplay
+      controlsList="nodownload noplaybackrate noremoteplayback"
+      disablePictureInPicture
+    >
+      <source src="video1.mp4" type="video/mp4">
+    </video>
+
   </div>
 
-  <!-- LOOP 20 VIDEO -->
+  <div class="video-list">
 
-  <!-- VIDEO 1 -->
-  <div class="movie-card">
-    <div class="movie-video">
+    <div class="video-item" onclick="changeVideo('video1.mp4')">
 
-      <video poster="https://picsum.photos/300/200?1">
-        <source src="video1.mp4" type="video/mp4">
+      <video muted>
+        <source src="video1.mp4">
       </video>
 
-      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
-         target="_blank"
-         class="play-btn">▶</a>
+      <div class="video-info">
+        <div class="video-title">
+          Video Viral 01
+        </div>
+
+        <div class="video-desc">
+          Video trending terbaru kualitas HD.
+        </div>
+      </div>
 
     </div>
 
-    <div class="movie-info">
+    <div class="video-item" onclick="changeVideo('video2.mp4')">
 
-      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
-         target="_blank"
-         class="judul-link">
-
-        <div class="movie-title">viral</div>
-
-      </a>
-
-      <div class="movie-date">Oct 28, 2026 09:00 AM</div>
-
-    </div>
-
-    <div class="more">⋮</div>
-  </div>
-
-  <!-- VIDEO 2 -->
-  <div class="movie-card">
-    <div class="movie-video">
-
-      <video poster="https://picsum.photos/300/200?2">
-        <source src="video2.mp4" type="video/mp4">
+      <video muted>
+        <source src="video2.mp4">
       </video>
 
-      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
-         target="_blank"
-         class="play-btn">▶</a>
+      <div class="video-info">
+        <div class="video-title">
+          Video Viral 02
+        </div>
+
+        <div class="video-desc">
+          Koleksi video populer terbaru.
+        </div>
+      </div>
 
     </div>
 
-    <div class="movie-info">
+    <div class="video-item" onclick="changeVideo('video3.mp4')">
 
-      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
-         target="_blank"
-         class="judul-link">
-
-        <div class="movie-title">Bu Guru Salsa</div>
-
-      </a>
-
-      <div class="movie-date">Oct 28, 2026 09:00 AM</div>
-
-    </div>
-
-    <div class="more">⋮</div>
-  </div>
-
-  <!-- VIDEO 3 -->
-  <div class="movie-card">
-    <div class="movie-video">
-
-      <video poster="https://picsum.photos/300/200?3">
-        <source src="video3.mp4" type="video/mp4">
+      <video muted>
+        <source src="video3.mp4">
       </video>
 
-      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
-         target="_blank"
-         class="play-btn">▶</a>
+      <div class="video-info">
+        <div class="video-title">
+          Video Viral 03
+        </div>
+
+        <div class="video-desc">
+          Video pilihan.
+        </div>
+      </div>
 
     </div>
 
-    <div class="movie-info">
+    <div class="video-item" onclick="changeVideo('video4.mp4')">
 
-      <a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
-         target="_blank"
-         class="judul-link">
+      <video muted>
+        <source src="video4.mp4">
+      </video>
 
-        <div class="movie-title">Artis Viral</div>
+      <div class="video-info">
+        <div class="video-title">
+          Video Viral 04
+        </div>
 
-      </a>
-
-      <div class="movie-date">Oct 28, 2026 09:00 AM</div>
+        <div class="video-desc">
+          Trending paling ramai ditonton.
+        </div>
+      </div>
 
     </div>
 
-    <div class="more">⋮</div>
   </div>
 
-  <!-- DUPLIKASI SAMPAI VIDEO 20 -->
-  <!-- Tinggal copy format di atas -->
+</section>
 
-</div>
+<!-- IKLAN -->
+<script src="https://rungbeacon.com/ac/cd/19/accd19456467f32573107aa43783b50a.js"></script>
 
-<!-- FLOAT BUTTON -->
+<script>
 
-<a href="https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d"
-   target="_blank"
-   class="floating-btn">
+function openVideos(){
 
-  🔍
+  document.getElementById("homePage").style.display = "none";
 
-</a>
+  document.getElementById("videoPage").style.display = "block";
+
+}
+
+function goHome(){
+
+  document.getElementById("videoPage").style.display = "none";
+
+  document.getElementById("homePage").style.display = "block";
+
+}
+
+function changeVideo(videoSrc){
+
+  const player = document.getElementById("mainPlayer");
+
+  player.src = videoSrc;
+
+  player.play();
+
+}
+
+</script>
 
 </body>
-</html>
+  </html>
