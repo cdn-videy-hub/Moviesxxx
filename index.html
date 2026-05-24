@@ -1,269 +1,217 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Collection</title>
+<meta name="viewport" content="width=1400">
+
+<title>PORN HUB</title>
 
 <style>
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
 body{
-  background:#050505;
-  color:white;
-  overflow-x:hidden;
+    background:linear-gradient(to bottom,#000,#1a0000,#440000);
+    color:white;
+    overflow-x:hidden;
 }
 
-/* =========================
-   HALAMAN HOME
-========================= */
-
-.home-page{
-  position:relative;
-  width:100%;
-  height:100vh;
-  overflow:hidden;
+#landing-page{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:
+    linear-gradient(rgba(0,0,0,0.75),rgba(30,0,0,0.9)),
+    url('bg.jpg') center/cover no-repeat;
 }
 
-/* BACKGROUND IMAGE */
-
-.bg-image{
-  position:absolute;
-  width:100%;
-  height:100%;
-  inset:0;
-  object-fit:cover;
+.box{
+    width:650px;
+    text-align:center;
+    background:rgba(0,0,0,0.55);
+    border:2px solid rgba(255,0,0,0.4);
+    padding:55px;
+    border-radius:24px;
+    backdrop-filter:blur(8px);
+    box-shadow:0 0 30px rgba(255,0,0,0.25);
 }
 
-/* OVERLAY */
+.box h1{
+    font-size:56px;
+    color:#ff3b3b;
+    margin-bottom:20px;
+}
+
+.box p{
+    font-size:20px;
+    line-height:1.7;
+    color:#ddd;
+    margin-bottom:35px;
+}
+
+.enter-btn{
+    border:none;
+    background:#ff2020;
+    color:white;
+    padding:18px 45px;
+    font-size:22px;
+    border-radius:14px;
+    transition:0.3s;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 25px rgba(255,0,0,0.5);
+}
+
+.enter-btn:hover{
+    transform:scale(1.05);
+    background:#ff4040;
+}
+
+#stream-page{
+    display:none;
+    padding:20px;
+}
+
+.container{
+    width:1400px;
+    margin:auto;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:25px;
+    color:#ff3b3b;
+    font-size:42px;
+}
+
+.ads-box{
+    width:100%;
+    min-height:90px;
+    margin:20px 0;
+    border-radius:14px;
+    overflow:hidden;
+    background:#111;
+    border:1px solid rgba(255,0,0,0.25);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.top-videos{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.top-videos video{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    border-radius:14px;
+    border:2px solid rgba(255,0,0,0.4);
+    background:black;
+}
+
+.fake-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.fake-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:14px;
+    border:2px solid rgba(255,0,0,0.4);
+    height:500px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.fake-card:hover{
+    transform:scale(1.01);
+    border-color:#ff3b3b;
+}
+
+.fake-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
 
 .overlay{
-  position:absolute;
-  inset:0;
-  background:
-  linear-gradient(
-    to right,
-    rgba(0,0,0,0.88),
-    rgba(0,0,0,0.45)
-  );
-  backdrop-filter:blur(2px);
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);
 }
 
-/* NAVBAR */
-
-.navbar{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  padding:28px 60px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:10;
+.play-btn{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:85px;
+    height:85px;
+    background:rgba(255,0,0,0.75);
+    border-radius:50%;
+    backdrop-filter:blur(5px);
+    box-shadow:0 0 20px rgba(255,0,0,0.5);
 }
 
-.logo{
-  font-size:30px;
-  font-weight:700;
-  color:#d4a45f;
+.play-btn::before{
+    content:'';
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-40%,-50%);
+    border-left:28px solid white;
+    border-top:18px solid transparent;
+    border-bottom:18px solid transparent;
 }
 
-.navbar ul{
-  display:flex;
-  gap:40px;
-  list-style:none;
+.duration{
+    position:absolute;
+    bottom:12px;
+    right:12px;
+    background:rgba(0,0,0,0.8);
+    padding:6px 10px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:bold;
 }
 
-.navbar ul li{
-  cursor:pointer;
-  transition:0.3s;
+.info{
+    position:absolute;
+    bottom:12px;
+    left:12px;
+    display:flex;
+    gap:12px;
+    font-size:14px;
+    font-weight:bold;
 }
 
-.navbar ul li:hover{
-  color:#d4a45f;
-}
-
-/* HERO CONTENT */
-
-.hero-content{
-  position:absolute;
-  z-index:10;
-  top:50%;
-  left:60px;
-  transform:translateY(-50%);
-  max-width:600px;
-}
-
-.hero-content span{
-  color:#d4a45f;
-  letter-spacing:4px;
-  font-size:13px;
-}
-
-.hero-content h1{
-  font-size:90px;
-  line-height:0.95;
-  margin:18px 0;
-}
-
-.hero-content p{
-  color:#ddd;
-  line-height:1.7;
-  margin-bottom:28px;
-}
-
-/* BUTTON */
-
-.hero-content button{
-  padding:15px 35px;
-  border:none;
-  background:#d4a45f;
-  color:black;
-  font-weight:700;
-  border-radius:10px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.hero-content button:hover{
-  transform:scale(1.05);
-}
-
-/* =========================
-   HALAMAN VIDEO
-========================= */
-
-.video-page{
-  display:none;
-  min-height:100vh;
-  padding:30px;
-  background:#050505;
-}
-
-/* VIDEO BESAR */
-
-.main-video{
-  width:100%;
-  height:75vh;
-  border-radius:22px;
-  overflow:hidden;
-  background:#000;
-  margin-bottom:30px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.5);
-}
-
-.main-video video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:22px;
-}
-
-/* KONTROL VIDEO */
-
-video::-webkit-media-controls-panel{
-  background:rgba(0,0,0,0.92);
-  padding:0 10px;
+.views,
+.likes{
+    background:rgba(0,0,0,0.75);
+    padding:6px 10px;
+    border-radius:8px;
 }
 
 video::-webkit-media-controls-download-button{
-  display:none;
-}
-
-/* LIST VIDEO */
-
-.video-list{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:22px;
-}
-
-.video-item{
-  background:#111;
-  border-radius:18px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:0.3s;
-  border:1px solid rgba(255,255,255,0.06);
-}
-
-.video-item:hover{
-  transform:translateY(-8px);
-}
-
-.video-item video{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  pointer-events:none;
-}
-
-.video-info{
-  padding:14px;
-}
-
-.video-title{
-  color:#f1d2a1;
-  font-size:16px;
-  font-weight:600;
-}
-
-.video-desc{
-  color:#aaa;
-  margin-top:6px;
-  font-size:14px;
-  line-height:1.5;
-}
-
-/* BACK BUTTON */
-
-.back-btn{
-  margin-bottom:20px;
-  padding:12px 24px;
-  border:none;
-  background:#d4a45f;
-  color:black;
-  font-weight:700;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-  .navbar{
-    padding:20px;
-  }
-
-  .navbar ul{
     display:none;
-  }
+}
 
-  .hero-content{
-    left:20px;
-    right:20px;
-  }
-
-  .hero-content h1{
-    font-size:55px;
-  }
-
-  .video-page{
-    padding:15px;
-  }
-
-  .main-video{
-    height:55vh;
-  }
-
+video::-webkit-media-controls-enclosure{
+    overflow:hidden;
 }
 
 </style>
@@ -271,190 +219,158 @@ video::-webkit-media-controls-download-button{
 
 <body>
 
-<!-- =========================
-     HALAMAN HOME
-========================= -->
+<section id="landing-page">
 
-<section class="home-page" id="homePage">
+<div class="box">
 
-  <!-- BACKGROUND IMAGE -->
-  <img src="108513.jpg" class="bg-image">
+<h1>PORN HUB</h1>
 
-  <!-- OVERLAY -->
-  <div class="overlay"></div>
+<p>
+ collection with HD
+</p>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
+<button class="enter-btn" onclick="openStream(); openAds();">
+ENTER NOW
+</button>
 
-    <div class="logo">
-      movie clips
-    </div>
-
-    <ul>
-      <li>HOME</li>
-      <li>COLLECTION</li>
-      <li>TRENDING</li>
-      <li>CONTACT</li>
-    </ul>
-
-  </nav>
-
-  <!-- CONTENT -->
-  <div class="hero-content">
-
-    <span>VIDEO</span>
-
-    <h1>
-      Viral <br>
-      terbaru.
-    </h1>
-
-    <p>
-      Kumpulan video trending.
-    </p>
-
-    <button onclick="openVideos()">
-      Masuk
-    </button>
-
-  </div>
+</div>
 
 </section>
 
-<!-- =========================
-     HALAMAN VIDEO
-========================= -->
+<section id="stream-page">
 
-<section class="video-page" id="videoPage">
+<div class="container">
 
-  <button class="back-btn" onclick="goHome()">
-    ← Kembali
-  </button>
+<h1 class="title">PORN HUB</h1>
 
-  <div class="main-video">
-
-    <video
-      id="mainPlayer"
-      controls
-      autoplay
-      controlsList="nodownload noplaybackrate noremoteplayback"
-      disablePictureInPicture
-    >
-      <source src="video5.mp4" type="video/mp4">
-    </video>
-
-  </div>
-
-  <div class="video-list">
-
-    <div class="video-item" onclick="changeVideo('video1.mp4')">
-
-      <video muted>
-        <source src="P.mp4">
-      </video>
-
-      <div class="video-info">
-        <div class="video-title">
-          Video Viral 01
-        </div>
-
-        <div class="video-desc">
-          Video trending terbaru kualitas HD.
-        </div>
-      </div>
-
-    </div>
-
-    <div class="video-item" onclick="changeVideo('video2.mp4')">
-
-      <video muted>
-        <source src="video2.mp4">
-      </video>
-
-      <div class="video-info">
-        <div class="video-title">
-          Video Viral 02
-        </div>
-
-        <div class="video-desc">
-          Koleksi video populer terbaru.
-        </div>
-      </div>
-
-    </div>
-
-    <div class="video-item" onclick="changeVideo('video3.mp4')">
-
-      <video muted>
-        <source src="video3.mp4">
-      </video>
-
-      <div class="video-info">
-        <div class="video-title">
-          Video Viral 03
-        </div>
-
-        <div class="video-desc">
-          Video pilihan.
-        </div>
-      </div>
-
-    </div>
-
-    <div class="video-item" onclick="changeVideo('video4.mp4')">
-
-      <video muted>
-        <source src="video4.mp4">
-      </video>
-
-      <div class="video-info">
-        <div class="video-title">
-          Video Viral 04
-        </div>
-
-        <div class="video-desc">
-          Trending paling ramai ditonton.
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- IKLAN -->
+<div class="ads-box">
 <script src="https://rungbeacon.com/ac/cd/19/accd19456467f32573107aa43783b50a.js"></script>
+</div>
+
+<div class="top-videos">
+
+<video controls controlsList="nodownload">
+<source src="video1.mp4" type="video/mp4">
+</video>
+
+<video controls controlsList="nodownload">
+<source src="video2.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="fake-list">
+
+<div class="fake-card">
+<img src="foto.jpg">
+<div class="overlay"></div>
+<div class="play-btn"></div>
+<div class="info">
+<div class="views">👁 1.2M</div>
+<div class="likes">❤ 84K</div>
+</div>
+<div class="duration">12:48</div>
+</div>
+
+<div class="fake-card">
+<img src="foto2.jpg">
+<div class="overlay"></div>
+<div class="play-btn"></div>
+<div class="info">
+<div class="views">👁 856K</div>
+<div class="likes">❤ 62K</div>
+</div>
+<div class="duration">09:15</div>
+</div>
+
+<div class="fake-card">
+<img src="foto.jpg">
+<div class="overlay"></div>
+<div class="play-btn"></div>
+<div class="info">
+<div class="views">👁 2.4M</div>
+<div class="likes">❤ 145K</div>
+</div>
+<div class="duration">18:02</div>
+</div>
+
+<div class="fake-card">
+<img src="foto.jpg">
+<div class="overlay"></div>
+<div class="play-btn"></div>
+<div class="info">
+<div class="views">👁 932K</div>
+<div class="likes">❤ 71K</div>
+</div>
+<div class="duration">14:27</div>
+</div>
+
+<div class="fake-card">
+<img src="foto.jpg">
+<div class="overlay"></div>
+<div class="play-btn"></div>
+<div class="info">
+<div class="views">👁 932K</div>
+<div class="likes">❤ 71K</div>
+</div>
+<div class="duration">14:27</div>
+</div>
+
+<div class="fake-card">
+<img src="foto.jpg">
+<div class="overlay"></div>
+<div class="play-btn"></div>
+<div class="info">
+<div class="views">👁 932K</div>
+<div class="likes">❤ 71K</div>
+</div>
+<div class="duration">14:27</div>
+</div>
+
+<div class="fake-card">
+<img src="foto.jpg">
+<div class="overlay"></div>
+<div class="play-btn"></div>
+<div class="info">
+<div class="views">👁 932K</div>
+<div class="likes">❤ 71K</div>
+</div>
+<div class="duration">14:27</div>
+</div>
+
+<div class="fake-card">
+<img src="foto.jpg">
+<div class="overlay"></div>
+<div class="play-btn"></div>
+<div class="info">
+<div class="views">👁 932K</div>
+<div class="likes">❤ 71K</div>
+</div>
+<div class="duration">14:27</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
 
 <script>
 
-function openVideos(){
-
-  document.getElementById("homePage").style.display = "none";
-
-  document.getElementById("videoPage").style.display = "block";
-
+function openStream(){
+    document.getElementById("landing-page").style.display="none";
+    document.getElementById("stream-page").style.display="block";
+    window.scrollTo(0,0);
 }
 
-function goHome(){
-
-  document.getElementById("videoPage").style.display = "none";
-
-  document.getElementById("homePage").style.display = "block";
-
-}
-
-function changeVideo(videoSrc){
-
-  const player = document.getElementById("mainPlayer");
-
-  player.src = videoSrc;
-
-  player.play();
-
+function openAds(){
+    window.open(
+    'https://rungbeacon.com/pihwy18d?key=b11979058384d9a9aa9cb5871faa888d',
+    '_blank'
+    );
 }
 
 </script>
 
 </body>
-  </html>
+</html>
